@@ -8,6 +8,9 @@ const authorsRoute = require("./routes/authorsRouter");
 const categoryRoute = require("./routes/categryRouter");
 const brandRoute = require("./routes/brandRouter");
 const productRoute = require("./routes/productRouter");
+const voucherRoute = require("./routes/voucherRouter");
+const userRoute = require("./routes/userRouter");
+
 mongoose.connect('mongodb+srv://minhnhat:nhat123@tlcn.e1fkcts.mongodb.net/?retryWrites=true&w=majority',()=>{
     console.log("Connected to MongoDB")
 })
@@ -21,10 +24,9 @@ app.use("/author", authorsRoute);
 app.use("/category", categoryRoute);
 app.use("/brand", brandRoute);
 app.use("/product",productRoute);
+app.use("/voucher",voucherRoute);
+app.use("/user",userRoute);
 
-app.get("/api",(req,res)=>{
-    res.status(200).json('hello');
-})
 app. listen(5000,()=>{
     console.log("Server running.")
 });

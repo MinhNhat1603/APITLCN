@@ -7,7 +7,7 @@ const voucherSchema = new mongoose.Schema({
     },
     createdAt:{
         type: Date,
-        required:true
+        default: Date.now
     },
     expiredDate:{
         type: Date,
@@ -17,20 +17,19 @@ const voucherSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    id:{
-        type: String,
-        required: true
-    },
     status:{
         type: Boolean,
-        required:true,
         default: true 
     },
     name:{
-        type: Date,
+        type: String,
         required: true
     },
-    type:{},
-    value:{} 
+    type:{
+        type: String
+    },
+    value:{
+        type: String
+    } 
 })
 module.exports = mongoose.model('voucher',voucherSchema)

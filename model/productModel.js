@@ -39,7 +39,9 @@ const productSchema =new mongoose.Schema({
         type: Number
     },
     rate:{
-        type: Number
+        type: Number,
+        min:0,
+        max:5
     },
     slug:{
         type: String

@@ -23,14 +23,36 @@ const categoryController = {
         }
     },
      //GET A CATEGORY
-     getAnAuthor: async (req, res)=>{
+     getACategory: async (req, res)=>{
         try {
-            const aCategory =await category.findById(req.params.id);
+            const aCategory =await category.findById(req.params.id).populate("products");
             res.status(200).json(aCategory);
         } catch (error) {
             res.status(500).json(err);
         }
-    }
+    },
+
+    //UPDATE CATEGORY
+    updateCategory: async (req, res)=>{
+        try {
+            const Category =await category.findById(req.params.id);
+            await Category.updateOne({$set: req.body});
+            res.status(200).json("Update successfully!");
+        } catch (error) {
+            res.status(500).json(err);
+        }
+    },
+
+    //DELETE CATEGORY
+    deleteCategory: async (req, res)=>{
+        try {
+            await product.updateMany({category:req.params.id},{category: null});
+            await category.findByIdAndDelete(req.params.id);
+            res.status(200).json("Delete successfully!");
+        } catch (error) {
+            res.status(500).json(err);
+        }
+    },
 };
 
 module.exports = categoryController;

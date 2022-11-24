@@ -9,6 +9,12 @@ router.post("/", authorsController.addAuthor);
 router.get("/", authorsController.getAllAuthor);
 
 //GET AN AUTHOR
-router.get("/:id",authorsController.getAnAuthor)
+router.get("/:id",authorsController.getAnAuthor);
+
+//UPDATE AUTHOR
+router.put("/:id",authorsController.updateAuthor);
+
+//DELETE AUTHOR
+router.delete("/:id",authorsController.deleteAuthor);
 
 module.exports =  router;
