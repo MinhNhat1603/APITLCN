@@ -41,7 +41,7 @@ const  productController = {
      //GET AN AUTHOR
      getAProduct: async (req, res)=>{
         try {
-            const aProduct =await product.findById(req.params.id).populate("author");
+            const aProduct =await product.findById(req.params.id).populate("category").populate("brand").populate("author");
             res.status(200).json(aProduct);
         } catch (error) {
             res.status(500).json(err);
