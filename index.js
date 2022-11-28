@@ -16,7 +16,6 @@ mongoose.connect('mongodb+srv://minhnhat:nhat123@tlcn.e1fkcts.mongodb.net/?retry
 })
 
 app.use(bodyParser.json({limit:"50mb"}));
-app.use(cors());
 app.use(morgan("common"));
 
 //ROUTES
