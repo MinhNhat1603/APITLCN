@@ -26,7 +26,3 @@ app.use("/brand", brandRoute);
 app.use("/product",productRoute);
 app.use("/voucher",voucherRoute);
 app.use("/user",userRoute);
-
-app. listen(5000,()=>{
-    console.log("Server running.")
-});
