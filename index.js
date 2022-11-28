@@ -10,7 +10,7 @@ const brandRoute = require("./routes/brandRouter");
 const productRoute = require("./routes/productRouter");
 const voucherRoute = require("./routes/voucherRouter");
 const userRoute = require("./routes/userRouter");
-app.use(cors()) // Use this after the variable declaration
+app.use(cors({credentials: true, origin: true}));
 mongoose.connect('mongodb+srv://minhnhat:nhat123@tlcn.e1fkcts.mongodb.net/?retryWrites=true&w=majority',()=>{
     console.log("Connected to MongoDB")
 })
@@ -26,3 +26,7 @@ app.use("/brand", brandRoute);
 app.use("/product",productRoute);
 app.use("/voucher",voucherRoute);
 app.use("/user",userRoute);
+
+app. listen(3000,()=>{
+    console.log("Server running.")
+});
