@@ -72,7 +72,14 @@ const  productController = {
             res.status(500).json(err);
         }
     },
-
+    getAProductbySlug: async (req, res)=>{
+        try {
+            const aProduct =await product.findOne({"slug": req.params.slug}).populate("category").populate("brand").populate("author");
+            res.status(200).json(aProduct);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
 
 
 };

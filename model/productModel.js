@@ -44,7 +44,7 @@ const productSchema =new mongoose.Schema({
         max:5
     },
     slug:{
-        type: String
+        type: String,unique : true
     },
     sold:{
         type: Number
