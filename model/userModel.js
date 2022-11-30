@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
         },
         images:{
             type: String
-        },
+        },  
         address:{
             type: String   
         }
@@ -45,6 +45,13 @@ const userSchema = new mongoose.Schema({
     status:{
         type: Boolean,
         default: true 
-    }
-})
+    },
+    orders:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "order"
+        }
+    ]
+},{timestamps: true}
+)
 module.exports =mongoose.model('user',userSchema)

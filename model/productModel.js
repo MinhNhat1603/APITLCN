@@ -44,10 +44,12 @@ const productSchema =new mongoose.Schema({
         max:5
     },
     slug:{
-        type: String,unique : true
+        type: String, unique : true
     },
     sold:{
         type: Number
     }   
-})
+},
+{timestamps: true}
+)
 module.exports = mongoose.model('product',productSchema)

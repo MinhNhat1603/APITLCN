@@ -5,10 +5,6 @@ const voucherSchema = new mongoose.Schema({
         type: 'Number',
         required: true
     },
-    createdAt:{
-        type: Date,
-        default: Date.now
-    },
     expiredDate:{
         type: Date,
         required: true
@@ -31,5 +27,6 @@ const voucherSchema = new mongoose.Schema({
     value:{
         type: String
     } 
-})
+},{timestamps: true}
+)
 module.exports = mongoose.model('voucher',voucherSchema)

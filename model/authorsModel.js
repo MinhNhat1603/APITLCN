@@ -3,7 +3,7 @@ const { default: mongoose } = require("mongoose");
 const authorsSchema = mongoose.Schema({
     name:{
         type: String,
-        require: true
+        required: true
     },
     products:[
         {
