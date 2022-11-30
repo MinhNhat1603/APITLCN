@@ -34,5 +34,28 @@ const orderController = {
             res.status(500).json(error);
         }
     },
+    //UPDATE ORDER
+    updateOrder: async (req, res)=>{
+        try {
+            const Order =await order.findById(req.params.id);
+            await Order.updateOne({$set: req.body});
+            res.status(200).json("Update successfully!");
+        } catch (error) {
+            res.status(500).json(err);
+        }
+    },
+    //DELETE ORDER
+    deleteOrder: async (req, res)=>{
+        try {
+            await user.updateMany(
+                {orders: req.params.id}, 
+                {$pull:{orders: req.params.id}}
+                );
+            await order.findByIdAndDelete(req.params.id);
+            res.status(200).json("Delete successfully!");
+        } catch (error) {
+            res.status(500).json(err);
+        }
+    }
 }
 module.exports =orderController;

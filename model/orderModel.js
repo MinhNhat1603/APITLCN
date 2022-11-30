@@ -42,7 +42,11 @@ const orderSchema =new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'voucher'
         }
-    ]
+    ],
+    status:{
+        type: Boolean,
+        default: false
+    }
 },{timestamps: true}
 )
 module.exports = mongoose.model('order',orderSchema)

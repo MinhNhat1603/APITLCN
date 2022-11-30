@@ -67,6 +67,15 @@ const  productController = {
                 {$pull:{products: req.params.id}}
                 );
             await product.findByIdAndDelete(req.params.id);
+            await category.updateMany(
+                {products: req.params.id}, 
+                {$pull:{products: req.params.id}}
+                );
+            await brand.updateMany(
+                {products: req.params.id}, 
+                {$pull:{products: req.params.id}}
+                );
+            await product.findByIdAndDelete(req.params.id);
             res.status(200).json("Delete successfully!");
         } catch (error) {
             res.status(500).json(err);
