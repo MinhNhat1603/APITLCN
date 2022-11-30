@@ -31,7 +31,7 @@ const authController = {
                     role: auser.role
                 },
                 "tieuluan", 
-                {expiresIn:"2h"}
+                {expiresIn:"24h"}
                 );
                 const {password,...others}=auser._doc;
                 res.status(200).json({...others,accessToken});      
@@ -40,7 +40,7 @@ const authController = {
                 res.status(404).json("Wrong password");
             }      
         } catch (error) {
-            res.status(500).json(errors,"dad");
+            res.status(500).json(errors);
         }
     },
     logoutUser:async (req, res)=>{
