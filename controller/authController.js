@@ -22,7 +22,7 @@ const authController = {
             const auser =await user.findOne({phone: req.body.phone});
             const apass= req.body.password;
             if(!auser){
-                res.status(404).json("Wrong phone");
+                return res.status(404).json("Wrong phone");
             }
             if(apass === auser.password && auser){ 
                 const accessToken = jwt.sign({
@@ -34,13 +34,13 @@ const authController = {
                 {expiresIn:"24h"}
                 );
                 const {password,...others}=auser._doc;
-                res.status(200).json({...others,accessToken});      
+                return res.status(200).json({...others,accessToken});      
             }
             else{
-                res.status(404).json("Wrong password");
+                return res.status(404).json("Wrong password");
             }      
         } catch (error) {
-            res.status(500).json(errors);
+            return res.status(500).json(error);
         }
     },
     logoutUser:async (req, res)=>{
