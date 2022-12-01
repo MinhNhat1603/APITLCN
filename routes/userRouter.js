@@ -6,13 +6,13 @@ const router =require("express").Router();
 router.post ("/", userController.addUser);
 
 //GET ALL USER
-router.get("/", middlewareController.verifyToken, userController.getAllUser);
+router.get("/", userController.getAllUser);
 
 //GET A USER
 router.get("/:id",userController.getAUser);
 
 //UPDATE USER
-router.put("/:id",middlewareController.verifyTokenAndAdmin,userController.updateUser);
+router.put("/:id",userController.updateUser);
 
 //DELETE USER
 router.delete("/:id",middlewareController.verifyTokenAndAdmin,userController.deleteUser);
