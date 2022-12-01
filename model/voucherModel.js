@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const voucherSchema = new mongoose.Schema({
     amount:{
-        type: 'Number',
+        type: Number,
         required: true
     },
     expiredDate:{
@@ -21,11 +21,15 @@ const voucherSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    code:{
+        type: String,
+        required: true
+    },
     type:{
-        type: String
+        type: Boolean
     },
     value:{
-        type: String
+        type: Number
     } 
 },{timestamps: true}
 )
