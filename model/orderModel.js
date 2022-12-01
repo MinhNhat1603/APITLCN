@@ -15,10 +15,18 @@ const orderSchema =new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'product'
             },
+            name:{
+                type: String
+            },
+            price:{
+                type: Number,
+                min:0
+            },
             quantity:{
                 type: Number,
                 min: 1
-            }
+            },
+
         }
     ],
     discount:{
