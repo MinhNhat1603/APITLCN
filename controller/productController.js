@@ -31,7 +31,7 @@ const  productController = {
     //GET ALL PRODUCT
     getAllProduct: async(req,res)=>{
         try {
-            const productdAll = await product.find();
+            const productdAll = await product.find().populate("category").populate("brand").populate("author");
             res.status(200).json(productdAll);
         } catch (error) {
             res.status(500).json(error);
