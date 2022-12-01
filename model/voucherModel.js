@@ -28,6 +28,9 @@ const voucherSchema = new mongoose.Schema({
     type:{
         type: Boolean
     },
+    unit:{
+        type: String
+    },
     value:{
         type: Number
     } 
