@@ -42,7 +42,7 @@ const addressController ={
                 headers: {"token": "427bb6dc-bc24-11ed-9dc6-f64f768dbc22", "Content-Type": "application/json"}})
                 a = await ShippingFee.json();
                 if( a.data!==null){
-                    a.data.short_name= service[i].short_name;
+                    a.data.s= service[i].short_name;
                     shippingFee[i] = a.data;
                 }
             }

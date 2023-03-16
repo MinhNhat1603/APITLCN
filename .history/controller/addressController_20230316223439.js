@@ -41,12 +41,9 @@ const addressController ={
                 "to_district_id":code[1], "to_ward_code":code[2],  "height":2, "length":30, "weight":quantity, "width":20}), 
                 headers: {"token": "427bb6dc-bc24-11ed-9dc6-f64f768dbc22", "Content-Type": "application/json"}})
                 a = await ShippingFee.json();
-                if( a.data!==null){
-                    a.data.short_name= service[i].short_name;
-                    shippingFee[i] = a.data;
-                }
-            }
-            
+                shippingFee[i] = a.data;
+                shippingFee[i].service_type = service[i].sh
+            }   
             res.status(200).json(shippingFee.filter(a => a !== null));
         } catch (error) {
             res.status(500).json(error);
