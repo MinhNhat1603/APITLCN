@@ -41,7 +41,7 @@ const orderController = {
             await Order.updateOne({$set: req.body});
             res.status(200).json("Update successfully!");
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json(err);
         }
     },
     //DELETE ORDER
@@ -54,7 +54,7 @@ const orderController = {
             await order.findByIdAndDelete(req.params.id);
             res.status(200).json("Delete successfully!");
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json(err);
         }
     }
 }

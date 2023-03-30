@@ -27,7 +27,7 @@ const userController = {
             const aUser =await user.findById(req.params.id);
             res.status(200).json(aUser);
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json(err);
         }
     },
 
@@ -38,7 +38,7 @@ const userController = {
             await User.updateOne({$set: req.body});
             res.status(200).json("Update successfully!");
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json(err);
         }
     },
 

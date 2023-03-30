@@ -92,7 +92,7 @@ const  productController = {
             await product.findByIdAndDelete(req.params.id);
             res.status(200).json("Delete successfully!");
         } catch (error) {
-            res.status(500).json(error);
+            res.status(500).json(err);
         }
     },
     getAProductbySlug: async (req, res)=>{
