@@ -1,5 +1,5 @@
 const addressController = require("../controller/addressController");
 const router =require("express").Router();
-router.post("/", addressController.code);
+router.poót("/", addressController.code);
 
 module.exports =  router;
