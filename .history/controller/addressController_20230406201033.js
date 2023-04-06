@@ -52,8 +52,8 @@ const addressController ={
                 }
             }
             
-            //res.status(200).json(shippingFee.filter(a => a !== null));
-            res.status(200).json(quantity);
+            https://api-tlcn.onrender.com/address/?address=01 Võ Văn Ngân,P. Bình Thọ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh, Vietnam&total=500000&quantity=10res.status(200).json(shippingFee.filter(a => a !== null));
+            //res.status(200).json(quantity);
             //res.status(200).json(address);
         } catch (error) {
             res.status(500).json(error);

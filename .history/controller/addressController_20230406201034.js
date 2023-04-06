@@ -52,8 +52,8 @@ const addressController ={
                 }
             }
             
-            //res.status(200).json(shippingFee.filter(a => a !== null));
-            res.status(200).json(quantity);
+            res.status(200).json(shippingFee.filter(a => a !== null));
+            //res.status(200).json(quantity);
             //res.status(200).json(address);
         } catch (error) {
             res.status(500).json(error);
