@@ -2,12 +2,12 @@ const addressController ={
     code: async(req,res)=>{
         try {
             const Address = req.query.address;    //lay Adress
-            var tt_value = req.query.total;     //lay gia tri don hang
+            const tt_value = req.query.total;     //lay gia tri don hang
             const quantity = req.query.quantity *200;
             // const Address = req.body.address;    //lay Adress
             //const tt_value = req.body.total;     //lay gia tri don hang
             // const quantity = req.body.quantity *200;
-            tt_value = parseInt(tt_value);
+            tt_value = tt_value.parseInt();
             const address= Address.split(",");
             var t = address.length -1;
             var code = [];
