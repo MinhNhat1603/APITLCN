@@ -7,7 +7,7 @@ const  productController = {
     searchProduct:async (req, res)=>{
         try {
             //const products = await product.find({ name : /Kiếp/});
-            const search = req.query.search;            
+            const search = req.query.name;            
             const products = await product.find(
                 { $text:{ $search: '\"' + search +'\"'} },
                 {score: {$meta: 'textScore'}}
