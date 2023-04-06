@@ -29,9 +29,7 @@ const orderSchema =new mongoose.Schema({
             image:{
                 type: String
             },
-            slug:{
-                type: String, unique : true
-            }
+
         }
     ],
     discount:{

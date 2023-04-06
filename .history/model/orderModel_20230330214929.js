@@ -26,12 +26,7 @@ const orderSchema =new mongoose.Schema({
                 type: Number,
                 min: 1
             },
-            image:{
-                type: String
-            },
-            slug:{
-                type: String, unique : true
-            }
+
         }
     ],
     discount:{

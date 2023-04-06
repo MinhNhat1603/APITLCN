@@ -31,7 +31,7 @@ const orderSchema =new mongoose.Schema({
             },
             slug:{
                 type: String, unique : true
-            }
+            },
         }
     ],
     discount:{

@@ -1,9 +1,9 @@
 const user = require("../model/userModel");
 const order = require("../model/orderModel")
-// const category= require("../model/categoryModel");
-// const product = require("../model/productModel");
-// const brand = require("../model/brandModel");
-// const authors = require("../model/authorsModel");
+const category= require("../model/categoryModel");
+const product = require("../model/productModel");
+const brand = require("../model/brandModel");
+const authors = require("../model/authorsModel");
 
 const orderController = {
     //ADD ORDER
@@ -23,10 +23,8 @@ const orderController = {
     //GET AN ORDER
     getAnOrder: async (req, res)=>{
         try {
-            var Order =await order.findById(req.params.id); //.populate("category").populate("brand").populate("author").populate("product")
-            //Order = Order.cart.populate("product");
+            vaả Order =await order.findById(req.params.id).populate("product"); //.populate("category").populate("brand").populate("author").populate("product")
             res.status(200).json(Order);
-
         } catch (error) {
             res.status(500).json(error);
         }
