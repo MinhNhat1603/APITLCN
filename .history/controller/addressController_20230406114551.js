@@ -1,12 +1,9 @@
 const addressController ={
     code: async(req,res)=>{
         try {
-            const Address = req.query.address;    //lay Adress
-            const tt_value = req.query.total*1;     //lay gia tri don hang
-            const quantity = req.query.quantity *200;
-            // const Address = req.body.address;    //lay Adress
-            //const tt_value = req.body.total;     //lay gia tri don hang
-            // const quantity = req.body.quantity *200;
+            const Address = req.params.address;    //lay Adress
+            const tt_value = req.params.total;     //lay gia tri don hang
+            const quantity = req.params.quantity *200;
             const address= Address.split(",");
             var t = address.length -1;
             var code = [];
@@ -40,19 +37,17 @@ const addressController ={
             var shippingFee =[];
             for ( let i = 0; i< service.length; i++){
                 var ShippingFee = await fetch("https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee",
-                {method: 'POST', body: JSON.stringify({"service_type_id":service[i].service_type_id, "insurance_value":tt_value, "coupon": null, "from_district_id":1542, 
+                {method: 'POST', body: JSON.stringify({"service_id":service[i].service_id, "insurance_value":tt_value, "coupon": null, "from_district_id":1542, 
                 "to_district_id":code[1], "to_ward_code":code[2],  "height":2, "length":30, "weight":quantity, "width":20}), 
                 headers: {"token": "427bb6dc-bc24-11ed-9dc6-f64f768dbc22", "Content-Type": "application/json"}})
                 a = await ShippingFee.json();
-                if( a.data!=null){
+                if( a.data!==null){
                     a.data.short_name= service[i].short_name;
                     shippingFee[i] = a.data;
                 }
             }
             
-            res.status(200).json(shippingFee.filter(a => a !== null));
-            //res.status(200).json(tt_value);
-            //res.status(200).json(address);
+            //res.status(200).json(shippingFee.filter(a => a !== null));
         } catch (error) {
             res.status(500).json(error);
         }        

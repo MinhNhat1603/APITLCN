@@ -50,7 +50,7 @@ const addressController ={
                 }
             }
             
-            res.status(200).json(shippingFee.filter(a => a !== null));
+            //res.status(200).json(shippingFee.filter(a => a !== null));
             //res.status(200).json(tt_value);
             //res.status(200).json(address);
         } catch (error) {

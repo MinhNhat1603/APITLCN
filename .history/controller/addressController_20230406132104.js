@@ -2,10 +2,10 @@ const addressController ={
     code: async(req,res)=>{
         try {
             const Address = req.query.address;    //lay Adress
-            const tt_value = req.query.total*1;     //lay gia tri don hang
+            const tt_value = req.query.total;     //lay gia tri don hang
             const quantity = req.query.quantity *200;
             // const Address = req.body.address;    //lay Adress
-            //const tt_value = req.body.total;     //lay gia tri don hang
+            // const tt_value = req.body.total;     //lay gia tri don hang
             // const quantity = req.body.quantity *200;
             const address= Address.split(",");
             var t = address.length -1;
@@ -50,8 +50,8 @@ const addressController ={
                 }
             }
             
-            res.status(200).json(shippingFee.filter(a => a !== null));
-            //res.status(200).json(tt_value);
+            //res.status(200).json(shippingFee.filter(a => a !== null));
+            res.status(200).json(sh);
             //res.status(200).json(address);
         } catch (error) {
             res.status(500).json(error);
