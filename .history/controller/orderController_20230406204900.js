@@ -4,7 +4,6 @@ const category= require("../model/categoryModel");
 const product = require("../model/productModel");
 const brand = require("../model/brandModel");
 const authors = require("../model/authorsModel");
-
 const orderController = {
     //ADD ORDER
     addOrder: async(req,res)=>{
@@ -23,7 +22,7 @@ const orderController = {
     //GET AN ORDER
     getAnOrder: async (req, res)=>{
         try {
-            const Order =await order.findById(req.params.id).populate("product").populate("category").populate("brand").populate("author");
+            const Order =await order.findById(req.params.id);
             res.status(200).json(Order);
         } catch (error) {
             res.status(500).json(error);
