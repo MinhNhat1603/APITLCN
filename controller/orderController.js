@@ -34,7 +34,7 @@ const orderController = {
     //GET ALL ORDER
     getAllOrder: async(req,res)=>{
         try {
-            const AllOrder = await order.find();
+            const AllOrder = await order.find().sort({'createdAt': -1});
             res.status(200).json(AllOrder);
         } catch (error) {
             res.status(500).json(error);
