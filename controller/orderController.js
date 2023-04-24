@@ -21,11 +21,11 @@ const orderController = {
             }
             var cart = saveOrder.cart;
             for(let i=0; i < cart.length; i++){
-                var product = await fetch("http://localhost:3000/product/638080c4c20e8937f190efd6", {method: 'POST'})
+                var product = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'POST'})
                 product = await product.json();
-                var inventory = parseInt(product.inventory) - parseInt(cart[0].quantity);
+                var inventory = parseInt(product.inventory) - parseInt(cart[i].quantity);
                 var sold = parseInt(product.sold) + parseInt(cart[i].quantity);
-                var results = await fetch("http://localhost:3000/product/"+ cart[0].productId, {method: 'PUT', headers: {"Content-Type": "application/json"},body: JSON.stringify({"inventory": inventory, "sold": sold})}) 
+                var results = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'PUT', headers: {"Content-Type": "application/json"},body: JSON.stringify({"inventory": inventory, "sold": sold})}) 
                         
             }
             res.status(200).json("susess");
