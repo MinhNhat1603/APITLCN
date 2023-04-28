@@ -1,7 +1,7 @@
 const user = require("../model/userModel");
 const order = require("../model/orderModel")
 // const category= require("../model/categoryModel");
-// const product = require("../model/productModel");
+const Product = require("../model/productModel");
 // const brand = require("../model/brandModel");
 // const authors = require("../model/authorsModel");
 
@@ -11,26 +11,31 @@ const orderController = {
         try {
             var newOrder = new order(req.body);
             var cart = newOrder.cart;
-            // for(let i=0; i < cart.length; i++){
-            //     newOrder.cart[i].slug = Math.random().toString(36).substring(2,7);
-            // }
             const saveOrder = await newOrder.save();
             if(req.body.userId){
-                const aUser = user.findById(req.body.userId)
-                await aUser.updateOne({$push: {orders: saveOrder._id}})
+                const aUser = user.findById(req.body.userId);
+                await aUser.updateOne({$push: {orders: saveOrder._id}});
             }
-            var cart = saveOrder.cart;
             for(let i=0; i < cart.length; i++){
-                var product = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'POST'})
-                product = await product.json();
-                var inventory = parseInt(product.inventory) - parseInt(cart[i].quantity);
-                var sold = parseInt(product.sold) + parseInt(cart[i].quantity);
-                var results = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'PUT', headers: {"Content-Type": "application/json"},body: JSON.stringify({"inventory": inventory, "sold": sold})}) 
-                        
+                // var product = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'POST'})
+                // product = await product.json();
+                // var inventory = parseInt(product.inventory) - parseInt(cart[i].quantity);
+                // var sold = parseInt(product.sold) + parseInt(cart[i].quantity);
+                // var results = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'PUT', headers: {"Content-Type": "application/json"},body: JSON.stringify({"inventory": inventory, "sold": sold})}) 
+                const product =await Product.findById(cart[i].productId);
+                //await Product.updateOne({$set: req.body});
+                await product.updateOne( 
+                    {
+                        "$inc":{
+                            "inventory": - cart[i].quantity,
+                            "sold": cart[i].quantity
+                        }
+                    }
+                );      
             }
-            res.status(200).json("susess");
+            res.status(200).json("successfully!");
         } catch (error) { 
-            res.status(500).json("sss");
+            res.status(500).json(error);
         }
     },
     //GET AN ORDER
