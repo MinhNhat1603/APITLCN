@@ -13,8 +13,7 @@ const orderSchema =new mongoose.Schema({
         {
             productId:{
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'product',
-                unique: false
+                ref: 'product'
             },
             name:{
                 type: String
@@ -58,8 +57,8 @@ const orderSchema =new mongoose.Schema({
         }
     ],
     status:{
-        type: Boolean,
-        default: false
+        type: Number,
+        default: 0
     }
 },{timestamps: true}
 )
