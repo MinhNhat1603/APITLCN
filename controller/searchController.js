@@ -12,6 +12,17 @@ const  productController = {
                 { $text:{ $search: '\"' + search +'\"'} },
                 {score: {$meta: 'textScore'}}
             ).populate("category").populate("brand").populate("author");
+            const author =await authors.find(
+                { $text:{ $search: '\"' + search +'\"'} },
+                {score: {$meta: 'textScore'}}
+            )
+            for( let i =0; i< author.length; i++){
+                var productA= author[i].product;
+                for(let j =0; j< productA.length;j++){
+                    const aProduct =await product.findById(productA[j]).populate("category").populate("brand").populate("author");
+                    products.push(aProduct);
+                }
+            }
             res.status(200).json(products);
         } catch (error) {
             res.status(500).json(error);
