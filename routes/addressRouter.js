@@ -8,5 +8,6 @@ router.get("/District", addressController.codeDistrict);
 router.get("/Ward", addressController.codeWard);
 //Phi Van chuyen
 router.get("/FeeShip", addressController.getFeeShip);
+router.get("/code", addressController.code);
 
 module.exports =  router;
