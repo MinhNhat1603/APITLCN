@@ -1,5 +1,12 @@
 const addressController = require("../controller/addressController");
 const router =require("express").Router();
-router.get("/", addressController.code);
+//TỈNH
+router.get("/Province", addressController.codeProvince);
+//QUẬN HUYỆN
+router.get("/District", addressController.codeDistrict);
+//Xã Phường
+router.get("/Ward", addressController.codeWard);
+//Phi Van chuyen
+router.get("/FeeShip", addressController.getFeeShip);
 
 module.exports =  router;
