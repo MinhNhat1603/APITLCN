@@ -23,4 +23,7 @@ router.get("/slug/:slug",productController.getAProductbySlug);
 //SEARCH
 router.get("/search", productController.searchProduct);
 
+//SẢN PHẨM BÁN CHẠY
+router.get("/best",productController.getBestProducts);
+
 module.exports =router;

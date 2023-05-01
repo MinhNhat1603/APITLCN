@@ -153,7 +153,7 @@ const addressController ={
                 delete dataWard[i].CreatedDate
                 delete dataWard[i].CreatedSource
                 delete dataWard[i].CreatedEmployee
-                delete dataWard[i].CreatedIP;
+                delete dataWard[i].CreatedIP;   
             }
             res.status(200).json(dataWard);
         } catch (error) {
@@ -165,7 +165,7 @@ const addressController ={
             const to_district= req.body.district_id;
             const to_ward= req.body.WardCode;
             const quantity = req.body.quantity;
-            const tt_value = req.body.total
+            const tt_value = req.body.total;
             const Service = await fetch("https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/available-services",
             {method: 'POST', body: JSON.stringify({"shop_id": 3912285, "from_district": 1542 , "to_district": to_district}), 
             headers: {"token": "427bb6dc-bc24-11ed-9dc6-f64f768dbc22", "Content-Type": "application/json"}})

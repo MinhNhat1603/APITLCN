@@ -120,6 +120,16 @@ const  productController = {
             res.status(500).json(error);
         }
     },
+    //SẢN PHẨM BÁN CHẠY NHÂT
+    getBestProducts: async (req, res)=>{
+        try {
+            const BestProductd = await product.find().populate("category").populate("brand").populate("author").sort({'sold': -1});
+            const bestProductd = BestProductd.slice(0, 10);
+            res.status(200).json(bestProductd);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
 };
 
 module.exports =productController;
