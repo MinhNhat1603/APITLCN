@@ -15,7 +15,7 @@ const authRoute = require("./routes/authRouter");
 const orderRoute = require("./routes/orderRouter");
 const addressRoute = require("./routes/addressRouter");
 const searchRoute = require("./routes/searchRouter");
-
+const statiscal = require("./routes/statiscalRouter");
 app.use(cors({credentials: true, origin: true}));
 mongoose.connect('mongodb+srv://minhnhat:nhat123@tlcn.e1fkcts.mongodb.net/?retryWrites=true&w=majority',()=>{
     console.log("Connected to MongoDB")
@@ -36,6 +36,7 @@ app.use("/auth", authRoute);
 app.use("/order", orderRoute);
 app.use("/address", addressRoute);
 app.use("/search", searchRoute);
+app.use("/statiscal", statiscal);
 app. listen(3000,()=>{
     console.log("Server running.")
 });

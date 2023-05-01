@@ -12,11 +12,6 @@ const orderController = {
             var newOrder = new order(req.body);
             var cart = newOrder.cart;
             for(let i=0; i < cart.length; i++){
-                // var product = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'POST'})
-                // product = await product.json();
-                // var inventory = parseInt(product.inventory) - parseInt(cart[i].quantity);
-                // var sold = parseInt(product.sold) + parseInt(cart[i].quantity);
-                // var results = await fetch("http://localhost:3000/product/"+ cart[i].productId, {method: 'PUT', headers: {"Content-Type": "application/json"},body: JSON.stringify({"inventory": inventory, "sold": sold})}) 
                 const product =await Product.findById(cart[i].productId);
                 //await Product.updateOne({$set: req.body});
                 await product.updateOne( 
