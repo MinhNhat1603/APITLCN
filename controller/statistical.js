@@ -3,8 +3,8 @@ const Order = require("../model/orderModel");
 const  statiscal ={
     statiscalWeek: async (req, res)=>{
         try {
-            var startDate = req.body.startDate;
-            var endDate = req.body.endDate;
+            var startDate = req.query.startDate;
+            var endDate = req.query.endDate;
             const weeks = getWeeks(startDate, endDate);
             var orders =[];
             for(let i=0; i<weeks.length;i++){
@@ -39,8 +39,8 @@ const  statiscal ={
     },
     statiscalMonth: async (req, res)=>{
         try {
-            var startDate = req.body.startDate;
-            var endDate = req.body.endDate;
+            var startDate = req.query.startDate;
+            var endDate = req.query.endDate;
             const months = getMonths(startDate, endDate);
             var orders =[];
             for(let i=0; i<months.length;i++){
