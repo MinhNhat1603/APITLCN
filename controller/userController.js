@@ -1,5 +1,5 @@
 const user = require("../model/userModel");
-
+const order = require("../model/orderModel")
 const userController = {
     //ADD USER
     addUser: async (req,res) => {
@@ -24,7 +24,7 @@ const userController = {
      //GET A USER
      getAUser: async (req, res)=>{
         try {
-            const aUser =await user.findById(req.params.id);
+            const aUser =await user.findById(req.params.id).populate("orders");
             res.status(200).json(aUser);
         } catch (error) {
             res.status(500).json(error);

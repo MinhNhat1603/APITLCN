@@ -115,3 +115,4 @@ function getMonths(startDate, endDate) {
 
   return months;
 }
+
