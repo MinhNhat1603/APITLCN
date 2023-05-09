@@ -12,4 +12,6 @@ router.get("/description", searchController.searchByDescription);
 
 router.get("/author", searchController.searchByAuthor);
 
+router.get("/filter", searchController.filter);
+
 module.exports =router;

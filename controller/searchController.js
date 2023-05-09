@@ -49,6 +49,26 @@ const  productController = {
         } catch (error) {
             res.status(500).json(error);
         }
-    }
+    },
+    filter: async (req, res)=>{
+        try {
+            const AnAuthor = req.query.author;
+            const ACategory = req.query.category;
+            const products = await product.find().populate("category").populate("brand").populate("author");
+            const anAuthor = await author.findById(AnAuthor);
+            const aCategory = await category.findById(ACategory);
+            const Author = anAuthor.products;
+            const Category = aCategory.products;
+            let result = Author.filter(Element => Category.includes(Element));
+            var Result = [];
+            for(let i =0; i< result.length; i++){
+                const aProduct =await product.findById(result[i]).populate("category").populate("brand").populate("author");
+                Result.push(aProduct);
+            }
+            res.status(200).json(Result);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    },
 }
 module.exports =productController;
