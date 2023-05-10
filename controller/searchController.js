@@ -54,6 +54,7 @@ const  productController = {
         try {
             const AnAuthor = req.query.author;
             const ACategory = req.query.category;
+            
             const products = await product.find().populate("category").populate("brand").populate("author");
             const anAuthor = await author.findById(AnAuthor);
             const aCategory = await category.findById(ACategory);

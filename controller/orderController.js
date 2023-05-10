@@ -57,7 +57,7 @@ const orderController = {
     updateOrder: async (req, res)=>{
         try {
             const Order =await order.findById(req.params.id);
-            await Order.updateOne({$set: req.body});
+            await Order.updateOne({$set: req.query});
             res.status(200).json("Update successfully!");
         } catch (error) {
             res.status(500).json(error);
