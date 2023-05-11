@@ -14,7 +14,7 @@ const  statiscal ={
                       $lte: weeks[i].endDate
                   },
                    status:{
-                       $in: 2
+                       $gte: 2
                   }
                 });
                 //orders.push(order);
@@ -50,7 +50,7 @@ const  statiscal ={
                       $lte: months[i].endDate
                   },
                    status:{
-                       $in: 2
+                       $gte: 2
                   }
                 });
                 const report = {
