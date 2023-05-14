@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { model } = require("mongoose");
 
+
 const middlewareController={
     //VERiFYTOKEN
     verifyToken:(req,res,next)=>{

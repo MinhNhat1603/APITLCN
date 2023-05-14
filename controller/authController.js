@@ -1,5 +1,10 @@
 const user = require("../model/userModel");
 const jwt = require("jsonwebtoken");
+const speakeasy = require('speakeasy');
+const { Vonage } = require('@vonage/server-sdk');
+const accountSid = 'AC950563cf5a2813f1eb2f50a3692e7f33';
+const authToken = '50436d07dc3d397e5e548943dea6a1fc';
+const client = require('twilio')(accountSid, authToken);
 
 const authController = {
     //REGISTER
@@ -51,6 +56,21 @@ const authController = {
             res.status(500).json(error);
         }
     },
+    sendOTP: (req,res,next)=>{
+        // const vonage = new Vonage({
+        //     apiKey: 'f572f9ca',
+        //     apiSecret: '0rn2ZnFHrELHbp6P'
+        //   },{debug: true});
+        // const secret = speakeasy.generateSecret({ length: 20 });
+        // vonage.message.sendSms("84929370453","84868815325", req.body.message, {type: 'unicode'}, (err, responseData) => {if (responseData) {res.status(200).json(responseData)}});
+        client.messages
+            .create({
+                body: 'Hello there!',
+                from: '+84929370453',
+                to: '+84868815325'
+            })
+            .then(message => res.status(200).json(message.sid));
+    }
     
     
 }

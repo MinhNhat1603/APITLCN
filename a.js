@@ -1,12 +1,45 @@
-let arr1 = ['id1', 'id2', 'id3', 'id4', 'id5'];
-let arr2 = [
-  { objectID: 'id2', field2: 'value1' },
-  { objectID: 'id4', field2: 'value2' },
-  { objectID: 'id6', field2: 'value3' }
-];
-let result = arr2
-  .map(item => item.objectID) // Chuyển đổi mảng arr2 sang mảng objectID
-  .filter(id => arr1.includes(id)) // Lọc ra các objectID có trong arr1
-  .map(id => arr2.find(item => item.objectID === id)); // Lấy lại các đối tượng có objectID tương ứng
-
-console.log(result); // [{ objectID: 'id2', field2: 'value1' }, { objectID: 'id4', field2: 'value2' }]
+function compareArrays(arr1, arr2, arr3) {
+	let result = [];
+	
+	if (arr1 === null) {
+	  result = arr2.filter(obj2 => arr3.find(obj3 => JSON.stringify(obj3) === JSON.stringify(obj2)));
+	} else if (arr1.length === 0 && arr2.length === 0) {
+	  result = arr3;
+	} else if (arr2.length === 0) {
+	  result = arr1.filter(obj1 => arr3.find(obj3 => JSON.stringify(obj3) === JSON.stringify(obj1)));
+	} else if (arr3.length === 0) {
+	  result = arr1.filter(obj1 => arr2.find(obj2 => JSON.stringify(obj2) === JSON.stringify(obj1)));
+	} else {
+	  for (let i = 0; i < arr1.length; i++) {
+		let obj1 = arr1[i];
+		if (arr2.find(obj2 => JSON.stringify(obj2) === JSON.stringify(obj1)) &&
+			arr3.find(obj3 => JSON.stringify(obj3) === JSON.stringify(obj1))) {
+		  result.push(obj1);
+		}
+	  }
+	}
+	
+	return result;
+  }
+  const arr1 = [
+	{ id: 1, name: "John" },
+	{ id: 2, name: "Jane" },
+	{ id: 3, name: "Adam" }
+  ];
+  
+  const arr2 = [
+	{ id: 2, name: "Jane" },
+	{ id: 4, name: "Bob" },
+	{ id: 5, name: "Mary" }
+  ];
+  
+  const arr3 = [
+	{ id: 1, name: "John" },
+	{ id: 2, name: "Jane" },
+	{ id: 6, name: "Tom" }
+  ];
+  
+  console.log(compareArrays(null, arr2, arr3)); // Output: [ { id: 2, name: 'Jane' } ]
+  console.log(compareArrays([], [], arr3)); // Output: [ { id: 1, name: 'John' }, { id: 2, name: 'Jane' }, { id: 6, name: 'Tom' } ]
+  console.log(compareArrays(arr1, arr2, arr3)); // Output: [ { id: 2, name: 'Jane' } ]
+	
