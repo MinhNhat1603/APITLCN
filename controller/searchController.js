@@ -61,7 +61,7 @@ const  productController = {
         try {
             const allProduct = await product.find().populate("category").populate("brand").populate("author");
             //Product
-            const productSearch = unorm.nfd(req.query.product).replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const productSearch = unorm.nfd(req.query.name).replace(/[\u0300-\u036f]/g, '').toLowerCase();
             const resultProduct = allProduct.filter((product) =>{
                 const normalizedString = unorm.nfd(product.name).replace(/[\u0300-\u036f]/g, '').toLowerCase();
                 return normalizedString.includes(productSearch);

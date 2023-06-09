@@ -1,10 +1,11 @@
 const user = require("../model/userModel");
 const jwt = require("jsonwebtoken");
-const speakeasy = require('speakeasy');
 const { Vonage } = require('@vonage/server-sdk');
 const accountSid = 'AC950563cf5a2813f1eb2f50a3692e7f33';
 const authToken = '50436d07dc3d397e5e548943dea6a1fc';
-const client = require('twilio')(accountSid, authToken);
+const nodemailer = require('nodemailer');
+const bcrypt = require('bcryptjs');
+const key = 'tieuluan';
 
 const authController = {
     //REGISTER
@@ -12,6 +13,9 @@ const authController = {
         try {
             const newUser =await new user({
                 phone: req.body.phone,
+                userProfile:{
+                    email: req.body.email
+                },
                 password: req.body.password
             });
             const saveuser = await newUser.save();
@@ -56,22 +60,59 @@ const authController = {
             res.status(500).json(error);
         }
     },
-    sendOTP: (req,res,next)=>{
-        // const vonage = new Vonage({
-        //     apiKey: 'f572f9ca',
-        //     apiSecret: '0rn2ZnFHrELHbp6P'
-        //   },{debug: true});
-        // const secret = speakeasy.generateSecret({ length: 20 });
-        // vonage.message.sendSms("84929370453","84868815325", req.body.message, {type: 'unicode'}, (err, responseData) => {if (responseData) {res.status(200).json(responseData)}});
-        client.messages
-            .create({
-                body: 'Hello there!',
-                from: '+84929370453',
-                to: '+84868815325'
-            })
-            .then(message => res.status(200).json(message.sid));
-    }
-    
-    
+    sentOTP: async(req,res)=>{
+        const email = req.body.email;
+        const OTP = Math.floor(100000 + Math.random() * 900000).toString();
+        const mailOptions = {
+            from: 'vuminhnhat1603@gmail.com', // Địa chỉ email của bạn
+            to: email, // Địa chỉ email người nhận
+            subject: 'Mã OTP',
+            text: `Mã OTP của bạn là: ${OTP}`
+          };
+        const allUser = await user.find();
+        const filteredUsers = allUser.filter(user => user.userProfile.email === email);
+        const hashedOTP = hashOTP(OTP, key)
+        var aUser =filteredUsers[0];
+        if (!aUser) {
+            res.status(404).json("email không tồn tại");
+        }
+        const idUser = aUser.id;
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+                res.status(500).json(error);
+            } else {
+                res.status(200).json({'idUser': idUser, 'hashedOTP': hashedOTP});
+            }
+        });
+    },
+    compareOTP: async(req,res)=>{
+        const idUser =req.body.idUser;
+        const hashedOTP = req.body.hashedOTP;
+        const OTP = req.body.OTP;
+        const compareData = OTP + key;
+        const isMatch = bcrypt.compareSync(compareData, hashedOTP);
+        if(isMatch){
+            res.status(200).json(idUser)
+        }else{
+            res.status(400).json("Mã không hợp lệ")
+        }
+    }    
 }
 module.exports = authController;
+
+// Tạo một transporter sử dụng SMTP
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Sử dụng kết nối bảo mật SSL/TLS
+    auth: {
+      user: 'vuminhnhat1603@gmail.com', // Địa chỉ email của bạn
+      pass: 'cojtigdpohogdetp' // Mật khẩu email của bạn
+    }
+});
+
+const hashOTP = (OTP, key) => {
+    const salt = bcrypt.genSaltSync(10);
+    const hashedOTP = bcrypt.hashSync(OTP + key, salt);
+    return hashedOTP;
+};

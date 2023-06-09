@@ -9,6 +9,8 @@ router.post ("/login",authController.loginUser);
 router.post ("/logout",authController.logoutUser);
 
 //SEND OTP
-router.post ("/send-otp",authController.sendOTP);
+router.post ("/sendOTP",authController.sentOTP);
+//COMPARE
+router.post ("/compareOTP",authController.compareOTP);
 
 module.exports =router;
