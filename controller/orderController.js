@@ -1,9 +1,6 @@
 const user = require("../model/userModel");
-const order = require("../model/orderModel")
-// const category= require("../model/categoryModel");
+const order = require("../model/orderModel");
 const Product = require("../model/productModel");
-// const brand = require("../model/brandModel");
-// const authors = require("../model/authorsModel");
 
 const orderController = {
     //ADD ORDER

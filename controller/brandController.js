@@ -4,7 +4,6 @@ const product = require("../model/productModel");
 const brandController = {
     //ADD BRAND
     addBrand: async (req,res) => {
-        // res.status(200).json(req.body)
         try {
             const newBrand =new brand(req.body);
             const saveBrand = await newBrand.save();

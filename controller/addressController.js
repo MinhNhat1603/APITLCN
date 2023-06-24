@@ -6,9 +6,6 @@ const addressController ={
             const Address = req.query.address;    //lay Adress
             var tt_value = req.query.total;     //lay gia tri don hang
             var quantity = req.query.quantity;
-            // const Address = req.body.address;    //lay Adress
-            //const tt_value = req.body.total;     //lay gia tri don hang
-            // const quantity = req.body.quantity *200;
             tt_value = parseInt(tt_value);
             quantity = parseInt( quantity)*200;
             const address= Address.split(",");
@@ -55,8 +52,6 @@ const addressController ={
             }
             
             res.status(200).json(shippingFee.filter(a => a !== null));
-            //res.status(200).json(dataProvince);
-            //res.status(200).json(address);
         } catch (error) {
             res.status(500).json(error);
         }        

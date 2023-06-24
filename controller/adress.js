@@ -5,8 +5,7 @@ var code =null;
 let promise =fetch("https://online-gateway.ghn.vn/shiip/public-api/master-data/province",{method: 'GET', headers: {"token": "427bb6dc-bc24-11ed-9dc6-f64f768dbc22"}})
   .then((response) => response.json())
   .then((data) => {
-    getProvince(data); // data là một object
-    // console.log(data)
+    getProvince(data);
   }); 
 function getProvince(data){
     const province = data.data;
@@ -37,8 +36,7 @@ function getProvince(data){
     headers: {"token": "427bb6dc-bc24-11ed-9dc6-f64f768dbc22", "Content-Type": "application/json"}})
     .then((response) => response.json())
     .then((data1) => {
-        getDistrict(data1,code); // data là một object
-        //console.log(data1)
+        getDistrict(data1,code); 
     }); 
 }
 function getDistrict(data,code){
@@ -69,7 +67,7 @@ function getDistrict(data,code){
     headers: {"token": "427bb6dc-bc24-11ed-9dc6-f64f768dbc22", "Content-Type": "application/json"}})
     .then((response) => response.json())
     .then((data1) => {
-        getWard(data1,code); // data là một object
+        getWard(data1,code); 
     }); 
 }
 function getWard(data,code){

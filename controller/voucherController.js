@@ -3,7 +3,6 @@ const voucher = require("../model/voucherModel");
 const voucherController = {
     //ADD VOUCHER
     addVoucher: async (req,res) => {
-        // res.status(200).json(req.body)
         try {
             const newVoucher =new voucher(req.body);
             const saveVoucher = await newVoucher.save();

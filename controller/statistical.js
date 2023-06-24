@@ -17,12 +17,6 @@ const  statiscal ={
                        $gte: 2
                   }
                 });
-                //orders.push(order);
-                // const bill =order.length;
-                // var money=0;
-                // for(let j = 0; j <bill; j++){
-                //     money += order[j].totalPrice
-                // }
                 const report = {
                     startDate: weeks[i].startDate,
                     endDate:  weeks[i].endDate,
@@ -54,8 +48,6 @@ const  statiscal ={
                   }
                 });
                 const report = {
-                    //startDate: months[i].startDate,
-                    //endDate:  months[i].endDate,
                     month: months[i].month,
                     year: months[i].year,                    
                     orderlist: order

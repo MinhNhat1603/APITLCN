@@ -37,21 +37,6 @@ const  productController = {
             res.status(500).json(error);
         }
     },
-    // getAllProduct: async(req,res)=>{
-    //     try {
-    //         const productdAll = await product.find();
-    //         let i=0;
-    //         while(i < productdAll.length){
-    //             // product1[i] = productdAll[i];
-    //             productdAll[i].inventory= 100;
-    //             await productdAll[i].save();
-    //             i++;
-    //         }
-    //         res.status(200).json(productdAll);
-    //     } catch (error) {
-    //         res.status(500).json(error);
-    //     }
-    // },
      //GET AN AUTHOR
     getAProduct: async (req, res)=>{
         try {
@@ -104,15 +89,6 @@ const  productController = {
         }
     },
     searchProduct:async (req, res)=>{
-        // try {
-        //     // product.createIndexes({'name' : 'text'});
-        //     // var a = 'kiep'
-        //     // const products = await product.find({ $text:{ $search: a}});
-        //     const products = await product.find({ name : /a/});
-        //     res.status(200).json(products.length);
-        // } catch (error) {
-        //     res.status(500).json(error);
-        // }
         try {
             const productdAll = await product.find().populate("category").populate("brand").populate("author");
             res.status(200).json(productdAll);

@@ -33,6 +33,9 @@ const voucherSchema = new mongoose.Schema({
     },
     value:{
         type: Number
+    },
+    image:{
+        type: String
     } 
 },{timestamps: true}
 )

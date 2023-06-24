@@ -3,7 +3,6 @@ const order = require("../model/orderModel")
 const userController = {
     //ADD USER
     addUser: async (req,res) => {
-        // res.status(200).json(req.body)
         try {
             const newUser =new user(req.body);
             const saveUser = await newUser.save();
