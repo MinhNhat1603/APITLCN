@@ -79,9 +79,35 @@ const  productController = {
                 const normalizedString = unorm.nfd(product.description).replace(/[\u0300-\u036f]/g, '').toLowerCase();
                 return normalizedString.includes(description);
             });
-
-            const result = compareArrays(resultProduct, resultAuthor, resultDescription);
-            res.status(200).json(result);
+            if(req.query.name == null && req.query.author == null && req.query.description == null){               
+                res.status(200).json();
+            }
+            if(req.query.name != null && req.query.author != null && req.query.description != null){
+                const result = compareArrays(resultProduct, resultAuthor, resultDescription);
+                res.status(200).json(result);
+            }
+            if(req.query.name == null && req.query.author != null && req.query.description != null){
+                const result = compare2Arrays(resultAuthor, resultDescription);
+                res.status(200).json(result);
+            }
+            if(req.query.name != null && req.query.author == null && req.query.description != null){
+                const result = compare2Arrays(resultProduct, resultDescription);
+                res.status(200).json(result);
+            }
+            if(req.query.name != null && req.query.author != null && req.query.description == null){
+                const result = compare2Arrays(resultProduct, resultAuthor);
+                res.status(200).json(result);
+            }
+            if(req.query.name != null && req.query.author == null && req.query.description == null){
+                res.status(200).json(resultProduct);
+            }
+            if(req.query.name == null && req.query.author != null && req.query.description == null){
+                res.status(200).json(resultAuthor);
+            }
+            if(req.query.name == null && req.query.author == null && req.query.description != null){
+                res.status(200).json(resultDescription);
+            }
+            //res.status(200).json(resultProduct);
         } catch (error) {
             res.status(500).json(error);
         }
@@ -91,7 +117,6 @@ module.exports =productController;
 
 function compareArrays(arr1, arr2, arr3) {
 	let result = [];
-	
 	if (arr1 === null) {
 	  result = arr2.filter(obj2 => arr3.find(obj3 => JSON.stringify(obj3) === JSON.stringify(obj2)));
 	} else if (arr1.length === 0 && arr2.length === 0) {
@@ -111,4 +136,25 @@ function compareArrays(arr1, arr2, arr3) {
 	}
 	
 	return result;
+}
+
+function compare2Arrays(arr1, arr2) {
+    let result = [];
+  
+    if (arr1 === null) {
+      result = arr2.slice();
+    } else if (arr1.length === 0 && arr2.length === 0) {
+      result = [];
+    } else if (arr2.length === 0) {
+      result = [];
+    } else {
+      for (let i = 0; i < arr1.length; i++) {
+        let obj1 = arr1[i];
+        if (arr2.find(obj2 => JSON.stringify(obj2) === JSON.stringify(obj1))) {
+          result.push(obj1);
+        }
+      }
+    }
+  
+    return result;
   }
